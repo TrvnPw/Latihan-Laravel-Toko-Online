@@ -21,6 +21,6 @@ class Produk extends Model
     }
     
     public function fotoProduk(){
-        return $this->belongsTo(FotoProduk::class);
+        return $this->hasMany(FotoProduk::class);
     }
 }

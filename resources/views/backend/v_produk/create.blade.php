@@ -6,7 +6,8 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <form class="form-horizontal" action="{{ route('backend.produk.store') }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="{{ route('backend.produk.store') }}"
+          method="post" enctype="multipart/form-data">
           @csrf
 
           <div class="card-body">
@@ -18,9 +19,7 @@
                   <label>Foto</label>
                   <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror" onchange="previewFoto()">
                   @error('foto')
-                  <div class="invalid-feedback alert-danger">
-                    {{ $message }}
-                  </div>
+                  <div class="invalid-feedback alert-danger">{{ $message }}</div>
                   @enderror
                 </div>
 
@@ -30,13 +29,15 @@
                 <div class="form-group">
                   <label>Kategori</label>
                   <select class="form-control @error('kategori') is-invalid @enderror" name="kategori_id">
-                    <option value="" selected> --Pilih Kategori-- </option>
+                    <option value="" selected>--Pilih Kategori--
+                    </option>
                     @foreach ($kategori as $k)
                     <option value="{{ $k->id }}"> {{ $k->nama_kategori }} </option>
                     @endforeach
                   </select>
                   @error('kategori_id')
-                  <span class="invalid-feedback alert-danger" role="alert">
+                  <span class="invalid-feedback alert-danger"
+                    role="alert">
                     {{ $message }}
                   </span>
                   @enderror
@@ -54,7 +55,9 @@
 
                 <div class="form-group">
                   <label>Detail</label><br>
-                  <textarea name="detail" class="form-control @error('detail') is-invalid @enderror" id="ckeditor">{{ old('detail') }}</textarea>
+                  <textarea name="detail" class="form-control @error('detail') is-invalid @enderror" id="ckeditor">
+                    {{ old('detail') }}
+                  </textarea>
                   @error('detail')
                   <span class="invalid-feedback alert-danger" role="alert">
                     {{ $message }}
@@ -71,7 +74,7 @@
                   </span>
                   @enderror
                 </div>
-                
+
                 <div class="form-group">
                   <label>Berat</label>
                   <input type="text" onkeypress="return hanyaAngka(event)" name="berat" value="{{ old('berat') }}" class="form-control @error('berat') is-invalid @enderror" placeholder="Masukkan Berat Produk">
