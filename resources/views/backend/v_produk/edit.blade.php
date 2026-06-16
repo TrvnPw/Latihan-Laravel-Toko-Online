@@ -23,8 +23,7 @@
                       {{-- Element img ini disiapkan kosong & disembunyikan, baru muncul via javascript saat user memilih file --}}
                       <img src="" class="foto-preview" width="100%" style="display:none;">
                     @endif
-                  </div>
-                  
+                  </div>                  
                   {{-- file foto --}}
                   <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror" onchange="previewFoto()">
                   @error('foto')

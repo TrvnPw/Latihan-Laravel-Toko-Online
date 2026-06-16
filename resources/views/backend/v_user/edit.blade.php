@@ -16,14 +16,15 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Foto</label>
-                  {{-- view image --}}
-                  @if ($edit->foto)
-                  <img src="{{ asset('storage/img-user/' . $edit->foto) }}" class="foto-preview" width="100%">
-                  <p></p>
-                  @else
-                  <img src="{{ asset('storage/img-user/img-default.jpg') }}" class="foto-preview" width="100%">
-                  <p></p>
-                  @endif
+                  {{-- view image: Hanya muncul jika kolom foto di database TIDAK NULL/KOSONG --}}
+                  <div class="mb-2">
+                    @if ($edit->foto)
+                    <img src="{{ asset('storage/img-produk/' . $edit->foto) }}" class="foto-preview" width="100%">
+                    @else
+                    {{-- Element img ini disiapkan kosong & disembunyikan, baru muncul via javascript saat user memilih file --}}
+                    <img src="" class="foto-preview" width="100%" style="display:none;">
+                    @endif  
+                  </div>
                   {{-- file foto --}}
                   <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror" onchange="previewFoto()">
                   @error('foto')
