@@ -146,9 +146,9 @@
               <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-
                 expanded="false">
                 @if (Auth::user()->foto)
-                <img src="{{ asset('storage/img-user/' . Auth::user()->foto) }}" alt="user" class="rounded-circle" width="31">
+                <img src="{{ asset('storage/img-user/' . Auth::user()->foto) }}" alt="user" class="rounded-circle" width="40">
                 @else
-                <img src="{{ asset('storage/img-user/img-default.jpg') }}"
+                <img src="{{ asset('storage/img-user/img-default.jpg') }}" class="rounded-circle" width="40"
                   alt="user" class="rounded-circle" width="31">
                 @endif
               </a>
