@@ -12,7 +12,7 @@
                     <h4 class="alert-heading">
                         Selamat Datang, {{ Auth::user()->nama }}
                     </h4>
-                    pada aplikasi Toko Online dengan hak akses yang anda miliki sebagai
+                    Pada aplikasi Marketplace dengan hak akses yang anda miliki sebagai
                     <b>
                         @if (Auth::user()->role ==1)
                         Super Admin
@@ -20,9 +20,9 @@
                         Admin
                         @endif
                     </b>
-                     ini adalah halaman utama dari aplikasi Web Programming. Studi Kasus Toko Online. 
+                     ini adalah halaman utama dari admin panel Zackana Store 
                     <hr>
-                    <p class="mb-0">Kuliah..? BSI Aja !!!</p>
+                    <p class="mb-0">TOKO PALING SIKMA</p>
                 </div>
             </div>
         </div>
