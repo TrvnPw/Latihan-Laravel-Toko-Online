@@ -11,16 +11,24 @@ class Produk extends Model
     public $timestamps = true;
     protected $table = "produk";
     protected $guarded = ['id'];
-    
-    public function kategori(){
+
+    public function kategori()
+    {
         return $this->belongsTo(Kategori::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    
-    public function fotoProduk(){
+
+    public function fotoProduk()
+    {
         return $this->hasMany(FotoProduk::class);
+    }
+
+    public function variasi()
+    {
+        return $this->hasMany(VariasiProduk::class, 'produk_id');
     }
 }

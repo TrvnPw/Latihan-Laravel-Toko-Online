@@ -18,12 +18,9 @@ return new class extends Migration
             $table->boolean('status');
             $table->string('nama_produk');
             $table->text('detail');
-            $table->double('harga');
-            $table->integer('stok');
-            $table->float('berat');
             $table->string('foto'); // Thumbnail image 
             $table->timestamps();
-            $table->foreign('kategori_id')->references('id')->on('kategori');
+            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user');
         });
     }

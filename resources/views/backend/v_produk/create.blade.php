@@ -56,7 +56,7 @@
                 <div class="form-group">
                   <label>Detail</label><br>
                   <textarea name="detail" class="form-control @error('detail') is-invalid @enderror" id="ckeditor">
-                    {{ old('detail') }}
+                  {{ old('detail') }}
                   </textarea>
                   @error('detail')
                   <span class="invalid-feedback alert-danger" role="alert">
@@ -65,34 +65,24 @@
                   @enderror
                 </div>
 
-                <div class="form-group">
-                  <label>Harga</label>
-                  <input type="text" onkeypress="return hanyaAngka(event)" name="harga" value="{{ old('harga') }}" class="form-control @error('harga') is-invalid @enderror" placeholder="Masukkan Harga Produk">
-                  @error('harga')
-                  <span class="invalid-feedback alert-danger" role="alert">
-                    {{ $message }}
-                  </span>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label>Berat</label>
-                  <input type="text" onkeypress="return hanyaAngka(event)" name="berat" value="{{ old('berat') }}" class="form-control @error('berat') is-invalid @enderror" placeholder="Masukkan Berat Produk">
-                  @error('berat')
-                  <span class="invalid-feedback alert-danger" role="alert">
-                    {{ $message }}
-                  </span>
-                  @enderror
-                </div>
-
-                <div class="form-group">
-                  <label>Stok</label>
-                  <input type="text" onkeypress="return hanyaAngka(event)" name="stok" value="{{ old('stok') }}" class="form-control @error('stok') is-invalid @enderror" placeholder="Masukkan Stok Produk">
-                  @error('stok')
-                  <span class="invalid-feedback alert-danger" role="alert">
-                    {{ $message }}
-                  </span>
-                  @enderror
+                <div id="variasi-container">
+                  <div class="row mb-2 variasi-row">
+                    <div class="col-md-4">
+                      <label>Nama Variasi</label>
+                      <input type="text" name="nama_variasi[]" class="form-control" placeholder="Cth: Private ...hari" required>
+                    </div>
+                    <div class="col-md-4">
+                      <label>Harga</label>
+                      <input type="text" onkeypress="return hanyaAngka(event)" name="harga_variasi[]" class="form-control" placeholder="Harga Variasi" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Stok</label>
+                      <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi" required>
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                      <button type="button" class="btn btn-success btn-tambah-variasi" style="margin-bottom: 2px;"><i class="fa fa-plus">+</i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -111,5 +101,33 @@
   </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(document).on('click', '.btn-tambah-variasi', function() {
+      let html = `
+        <div class="row mb-2 variasi-row">
+          <div class="col-md-4">
+            <input type="text" name="nama_variasi[]" class="form-control" placeholder="Cth: Private ...hari" required>
+          </div>
+          <div class="col-md-4">
+            <input type="text" onkeypress="return hanyaAngka(event)" name="harga_variasi[]" class="form-control" placeholder="Harga Variasi" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi" required>
+          </div>
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="button" class="btn btn-danger btn-hapus-variasi" style="margin-bottom: 2px;">X</button>
+          </div>
+        </div>
+      `;
+      $('#variasi-container').append(html);
+    });
+
+    $(document).on('click', '.btn-hapus-variasi', function() {
+      $(this).closest('.variasi-row').remove();
+    });
+  });
+</script>
 <!-- contentAkhir -->
 @endsection
