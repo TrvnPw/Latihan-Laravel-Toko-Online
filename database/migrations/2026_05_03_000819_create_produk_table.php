@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->boolean('status');
             $table->string('nama_produk');
-            $table->text('detail');
-            $table->string('foto'); // Thumbnail image 
+            $table->text('detail')->nullable();
+            $table->string('foto')->nullable(); // Thumbnail image 
             $table->timestamps();
             $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user');
