@@ -99,14 +99,14 @@ class DatabaseSeeder extends Seeder
         // 2. Buat variasinya berdasarkan ID produk di atas
         VariasiProduk::create([
             'produk_id'     => $produk2->id,
-            'nama_variasi'  => 'Diamond 1',
+            'nama_variasi'  => '1 Diamond',
             'harga_variasi' => 1000,
             'stok'          => 99
         ]);
 
         VariasiProduk::create([
             'produk_id'     => $produk2->id,
-            'nama_variasi'  => 'Diamond 3',
+            'nama_variasi'  => '3 Diamond',
             'harga_variasi' => 1500,
             'stok'          => 99
         ]);
