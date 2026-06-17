@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'role' => '1',
             'status' => 1,
             'hp' => '0812345678901',
-            'foto' => 'icon_zackana_store.png',
+            'foto' => 'logo.png',
             'password' => bcrypt('P@55word'),
         ]);
         #untuk record berikutnya silahkan, beri nilai berbeda pada nilai: nama, email, hp dengan nilai masing-masing anggota kelompok 

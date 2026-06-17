@@ -17,6 +17,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Foto</label>
+                  <img class="foto-preview">
                   <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror" onchange="previewFoto()">
                   @error('foto')
                   <div class="invalid-feedback alert-danger">{{ $message }}</div>
@@ -45,7 +46,7 @@
 
                 <div class="form-group">
                   <label>Nama Produk</label>
-                  <input type="text" name="nama_produk" value="{{ old('nama_produk') }}" class="form-control @error('nama_produk') is-invalid @enderror" placeholder="Masukkan Nama Prod">
+                  <input type="text" name="nama_produk" value="{{ old('nama_produk') }}" class="form-control @error('nama_produk') is-invalid @enderror" placeholder="Masukkan Nama Produk">
                   @error('nama_produk')
                   <span class="invalid-feedback alert-danger" role="alert">
                     {{ $message }}
@@ -69,7 +70,7 @@
                   <div class="row mb-2 variasi-row">
                     <div class="col-md-4">
                       <label>Nama Variasi</label>
-                      <input type="text" name="nama_variasi[]" class="form-control" placeholder="Cth: Private ...hari" required>
+                      <input type="text" name="nama_variasi[]" class="form-control" placeholder="Nama Variasi" required>
                     </div>
                     <div class="col-md-4">
                       <label>Harga</label>
@@ -80,7 +81,7 @@
                       <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi" required>
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
-                      <button type="button" class="btn btn-success btn-tambah-variasi" style="margin-bottom: 2px;"><i class="fa fa-plus">+</i></button>
+                      <button type="button" class="btn btn-success btn-tambah-variasi" style="margin-bottom: 2px;"><i class="fa fa-plus"></i></button>
                     </div>
                   </div>
                 </div>
@@ -108,7 +109,7 @@
       let html = `
         <div class="row mb-2 variasi-row">
           <div class="col-md-4">
-            <input type="text" name="nama_variasi[]" class="form-control" placeholder="Cth: Private ...hari" required>
+            <input type="text" name="nama_variasi[]" class="form-control" placeholder="Nama Variasi" required>
           </div>
           <div class="col-md-4">
             <input type="text" onkeypress="return hanyaAngka(event)" name="harga_variasi[]" class="form-control" placeholder="Harga Variasi" required>
