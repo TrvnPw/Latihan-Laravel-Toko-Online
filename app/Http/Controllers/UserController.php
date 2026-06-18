@@ -104,7 +104,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $rules = [
             'nama' => 'required|max:255',
-            'role' => 'required',
+            // Gunakan 'in:0,1,2' agar hanya nilai tersebut yang diizinkan
+            'role' => 'required|in:0,1,2',
             'status' => 'required',
             'hp' => 'required|min:10|max:13',
             'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',

@@ -2,24 +2,24 @@
 <html dir="ltr" lang="en">
 
 <style>
-    /* Mengatur agar wrapper utama mengambil tinggi layar penuh */
-    #main-wrapper {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-    
-    /* Membuat page-wrapper mengisi ruang kosong agar footer terdorong ke bawah */
-    .page-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
+  /* Mengatur agar wrapper utama mengambil tinggi layar penuh */
+  #main-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-    /* Memastikan konten di dalam page-wrapper mengisi ruang */
-    .container-fluid {
-        flex: 1;
-    }
+  /* Membuat page-wrapper mengisi ruang kosong agar footer terdorong ke bawah */
+  .page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Memastikan konten di dalam page-wrapper mengisi ruang */
+  .container-fluid {
+    flex: 1;
+  }
 </style>
 
 <head>
@@ -197,6 +197,12 @@
                 </li>
                 <li class="sidebar-item">
                   <a href="{{ route('backend.produk.index') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk </span></a>
+                </li>
+                <li class="sidebar-item">
+                  <a class="sidebar-link" href="{{ route('backend.transaksi.index') }}">
+                    <i class="mdi mdi-chevron-right"></i>
+                    <span>Data Transaksi</span>
+                  </a>
                 </li>
               </ul>
             </li>

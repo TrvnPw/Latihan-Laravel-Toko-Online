@@ -44,6 +44,9 @@
                     <option value="0" {{ old('role', $edit->role) == '0' ? 'selected' : '' }}>
                       Admin
                     </option>
+                    <option value="2" {{ old('role', $edit->role) == '2' ? 'selected' : '' }}>
+                      Member Biasa
+                    </option>
                   </select>
                   @error('role')
                   <span class="invalid-feedback alert-danger" role="alert">
@@ -114,23 +117,4 @@
     </div>
   </div>
 </div>
-
-<!-- <script>
-  function previewFoto() {
-    const foto = document.querySelector('input[name="foto"]');
-    const fotoPreview = document.querySelector('.foto-preview');
-
-    // Munculkan elemen img yang tadinya disembunyikan (display:none)
-    fotoPreview.style.display = 'block';
-
-    // Baca file yang di-upload dan tampilkan
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(foto.files[0]);
-
-    oFReader.onload = function(oFREvent) {
-      fotoPreview.src = oFREvent.target.result;
-    }
-  }
-</script> -->
-<!-- contentAkhir -->
 @endsection
