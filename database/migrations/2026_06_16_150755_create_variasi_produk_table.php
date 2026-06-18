@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('produk_id')->constrained('produk')->onDelete('cascade');
             $table->string('nama_variasi'); // Contoh: "Ukuran M", "Warna Merah"
             $table->double('harga_variasi'); // Harga untuk variasi ini
-            $table->integer('stok');
+            $table->integer('stok')->nullable();
             $table->timestamps();
         });
     }

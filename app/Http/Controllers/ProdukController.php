@@ -41,26 +41,29 @@ class ProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        // 1. Validasi diubah: Harga, berat, stok tunggal dihapus, diganti array variasi
+        // 1. Validasi diubah: foto dan stok_variasi jadi 'nullable' (opsional)
         $validatedData = $request->validate([
             'kategori_id' => 'required',
             'nama_produk' => 'required|max:255|unique:produk',
             'detail' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png,gif|file|max:1024',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|file|max:1024', // Hapus required, ganti nullable
             // Validasi untuk variasi dinamis
             'nama_variasi' => 'required|array',
             'harga_variasi' => 'required|array',
-            'stok_variasi' => 'required|array',
+            'stok_variasi' => 'nullable|array', // Hapus required, ganti nullable
         ], $messages = [
             'foto.image' => 'Format gambar gunakan file dengan ekstensi jpeg, jpg, png, atau gif.',
             'foto.max' => 'Ukuran file gambar Maksimal adalah 1024 KB.'
         ]);
 
-        // 2. Logic upload foto kamu (Tidak ada yang saya ubah di sini)
+        // 2. Logic upload foto
         $namaFotoDisimpan = null;
-        if ($request->file('foto')) {
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $extension = $file->getClientOriginalExtension();
             $originalFileName = date('YmdHis') . '_' . uniqid() . '.' . $extension;
@@ -68,43 +71,37 @@ class ProdukController extends Controller
 
             // Simpan gambar asli 
             $fileName = ImageHelper::uploadAndResize($file, $directory, $originalFileName);
-            $namaFotoDisimpan = $fileName;
 
             // create thumbnail 1 (lg) 
-            $thumbnailLg = 'thumb_lg_' . $originalFileName;
-            ImageHelper::uploadAndResize($file, $directory, $thumbnailLg, 800, null);
+            ImageHelper::uploadAndResize($file, $directory, 'thumb_lg_' . $originalFileName, 800, null);
 
             // create thumbnail 2 (md) 
-            $thumbnailMd = 'thumb_md_' . $originalFileName;
-            ImageHelper::uploadAndResize($file, $directory, $thumbnailMd, 500, 519);
+            ImageHelper::uploadAndResize($file, $directory, 'thumb_md_' . $originalFileName, 500, 519);
 
             // create thumbnail 3 (sm) 
-            $thumbnailSm = 'thumb_sm_' . $originalFileName;
-            ImageHelper::uploadAndResize($file, $directory, $thumbnailSm, 100, 110);
+            ImageHelper::uploadAndResize($file, $directory, 'thumb_sm_' . $originalFileName, 100, 110);
 
             $namaFotoDisimpan = $originalFileName;
         }
 
-        // 3. Simpan data Produk Utama (tanpa harga/berat/stok)
+        // 3. Simpan data Produk Utama
         $produk = Produk::create([
             'kategori_id' => $request->kategori_id,
             'user_id' => auth()->id(),
             'status' => 0,
             'nama_produk' => $request->nama_produk,
             'detail' => $request->detail,
-            'foto' => $namaFotoDisimpan,
+            'foto' => $namaFotoDisimpan, // Akan bernilai null jika foto tidak diupload
         ]);
 
-        // 4. Looping dan Simpan data Variasi ke tabel variasi_produks
+        // 4. Looping dan Simpan data Variasi
         foreach ($request->nama_variasi as $key => $nama) {
             \App\Models\VariasiProduk::create([
                 'produk_id'     => $produk->id,
                 'nama_variasi'  => $nama,
-
-                // YANG INI HARUS harga_variasi BUKAN harga
                 'harga_variasi' => $request->harga_variasi[$key],
-
-                'stok'          => $request->stok_variasi[$key],
+                // Tambahkan '?? null' jaga-jaga kalau array stok kosong
+                'stok'          => $request->stok_variasi[$key] ?? null,
             ]);
         }
 
@@ -152,11 +149,10 @@ class ProdukController extends Controller
             'kategori_id'   => 'required',
             'status'        => 'required',
             'detail'        => 'required',
-            'foto'          => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',
-            // Pastikan variasi diisi
+            'foto'          => 'nullable|image|mimes:jpeg,jpg,png,gif|file|max:1024', // Tambah nullable
             'nama_variasi'  => 'required|array',
             'harga_variasi' => 'required|array',
-            'stok_variasi'  => 'required|array',
+            'stok_variasi'  => 'nullable|array', // Ubah jadi nullable
         ];
 
         $messages = [
@@ -168,7 +164,7 @@ class ProdukController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         // 2. Logic Upload Foto
-        if ($request->file('foto')) {
+        if ($request->hasFile('foto')) {
             // Hapus gambar lama 
             if ($produk->foto) {
                 $oldPaths = [
@@ -189,17 +185,18 @@ class ProdukController extends Controller
             $originalFileName = date('YmdHis') . '_' . uniqid() . '.' . $extension;
             $directory = 'storage/img-produk/';
 
-            // Simpan gambar asli & thumbnail
-            $fileName = ImageHelper::uploadAndResize($file, $directory, $originalFileName);
+            ImageHelper::uploadAndResize($file, $directory, $originalFileName);
             ImageHelper::uploadAndResize($file, $directory, 'thumb_lg_' . $originalFileName, 800, null);
             ImageHelper::uploadAndResize($file, $directory, 'thumb_md_' . $originalFileName, 500, 519);
             ImageHelper::uploadAndResize($file, $directory, 'thumb_sm_' . $originalFileName, 100, 110);
 
             $validatedData['foto'] = $originalFileName;
+        } else {
+            // Mencegah foto lama terhapus jika update form tidak upload foto baru
+            unset($validatedData['foto']);
         }
 
         // 3. Simpan Update ke tabel 'produk'
-        // PENTING: Kita hapus array variasi dari $validatedData karena tabel produk tidak punya kolom ini
         unset($validatedData['nama_variasi']);
         unset($validatedData['harga_variasi']);
         unset($validatedData['stok_variasi']);
@@ -208,19 +205,14 @@ class ProdukController extends Controller
 
         // 4. Update data ke tabel 'variasi_produk'
         if ($request->has('nama_variasi')) {
-            // Hapus semua variasi yang lama di database
             \App\Models\VariasiProduk::where('produk_id', $produk->id)->delete();
 
-            // Masukkan variasi yang baru dari form edit
             foreach ($request->nama_variasi as $key => $nama) {
                 \App\Models\VariasiProduk::create([
                     'produk_id'     => $produk->id,
                     'nama_variasi'  => $nama,
-
-                    // YANG INI HARUS harga_variasi BUKAN harga
                     'harga_variasi' => $request->harga_variasi[$key],
-
-                    'stok'          => $request->stok_variasi[$key],
+                    'stok'          => $request->stok_variasi[$key] ?? null,
                 ]);
             }
         }
@@ -318,18 +310,21 @@ class ProdukController extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $query =  Produk::whereBetween('updated_at', [
-            $tanggalAwal . ' 00:00:00',
-            $tanggalAkhir . ' 23:59:59'
-        ])
+        // Pastikan Model Produk lu punya relasi ke 'kategori' dan 'variasi'
+        $query = \App\Models\Produk::with(['kategori', 'variasi'])
+            ->whereBetween('created_at', [
+                $tanggalAwal . ' 00:00:00',
+                $tanggalAkhir . ' 23:59:59'
+            ])
             ->orderBy('id', 'desc');
 
         $produk = $query->get();
+
         return view('backend.v_produk.cetak', [
-            'judul' => 'Laporan Produk',
+            'judul' => 'Laporan Data Produk',
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir,
-            'cetak' => $produk
+            'cetak' => $produk // Variabel ini yang ditangkap sama foreach di blade tadi
         ]);
     }
 }

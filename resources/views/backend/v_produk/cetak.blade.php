@@ -36,6 +36,7 @@
       <th>Kategori</th>
       <th>Status</th>
       <th>Nama Produk</th>
+      <th>Nama Varian</th>
       <th>Harga</th>
       <th>Stok</th>
     </tr>
@@ -43,21 +44,48 @@
   <tbody>
     @foreach ($cetak as $row)
     <tr>
-      <td> {{ $loop->iteration }}</td>
-      <td> {{ $row->kategori->nama_kategori }} </td>
-      <td>
-        @if ($row->status ==1)
+      <td align="center" style="vertical-align: top;"> {{ $loop->iteration }}</td>
+      <td style="vertical-align: top;"> {{ $row->kategori->nama_kategori ?? '-' }} </td>
+      <td style="vertical-align: top;">
+        @if ($row->status == 1)
         Publis
-        @elseif($row->status ==0)
+        @elseif($row->status == 0)
         Blok
         @endif
       </td>
-      <td> {{ $row->nama_produk }} </td>
-      <td> Rp. {{ number_format($row->harga, 0, ',', '.') }} </td>
-      <td> {{ $row->stok }} </td>
+      <td style="vertical-align: top;"> {{ $row->nama_produk }} </td>
+
+      <td style="vertical-align: top;">
+        @if($row->variasi && $row->variasi->count() > 0)
+        @foreach($row->variasi as $varian)
+        • {{ $varian->nama_variasi }} <br>
+        @endforeach
+        @else
+        -
+        @endif
+      </td>
+
+      <td style="vertical-align: top;">
+        @if($row->variasi && $row->variasi->count() > 0)
+        @foreach($row->variasi as $varian)
+        Rp. {{ number_format($varian->harga_variasi, 0, ',', '.') }} <br>
+        @endforeach
+        @else
+        Rp. {{ number_format($row->harga, 0, ',', '.') }}
+        @endif
+      </td>
+
+      <td style="vertical-align: top;">
+        @if($row->variasi && $row->variasi->count() > 0)
+        @foreach($row->variasi as $varian)
+        {{ $varian->stok }} <br>
+        @endforeach
+        @else
+        {{ $row->stok }}
+        @endif
+      </td>
     </tr>
     @endforeach
-
   </tbody>
 </table>
 <script>

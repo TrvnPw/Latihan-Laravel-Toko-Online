@@ -50,6 +50,8 @@
         Super Admin
         @elseif($row->role == 0)
         Admin
+        @elseif($row->role == 2)
+        Member Biasa
         @endif
       </td>
       <td>

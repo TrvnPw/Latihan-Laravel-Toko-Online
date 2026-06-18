@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-3">
                       <label>Stok</label>
-                      <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi" required>
+                      <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi">
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
                       <button type="button" class="btn btn-success btn-tambah-variasi" style="margin-bottom: 2px;"><i class="fa fa-plus"></i></button>
@@ -115,7 +115,7 @@
             <input type="text" onkeypress="return hanyaAngka(event)" name="harga_variasi[]" class="form-control" placeholder="Harga Variasi" required>
           </div>
           <div class="col-md-3">
-            <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi" required>
+            <input type="text" onkeypress="return hanyaAngka(event)" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi">
           </div>
           <div class="col-md-1 d-flex align-items-end">
             <button type="button" class="btn btn-danger btn-hapus-variasi" style="margin-bottom: 2px;">X</button>

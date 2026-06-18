@@ -93,13 +93,13 @@
                     @foreach($edit->variasi as $v)
                     <div class="row mb-2 variasi-row">
                       <div class="col-md-4">
-                        <input type="text" name="nama_variasi[]" class="form-control" value="{{ $v->nama_variasi }}" placeholder="Contoh: Ukuran M" required>
+                        <input type="text" name="nama_variasi[]" class="form-control" value="{{ $v->nama_variasi }}" placeholder="Nama Variasi" required>
                       </div>
                       <div class="col-md-4">
-                        <input type="number" name="harga_variasi[]" class="form-control" value="{{ $v->harga_variasi }}" placeholder="Contoh: 50000" required>
+                        <input type="number" name="harga_variasi[]" class="form-control" value="{{ $v->harga_variasi }}" placeholder="Harga Variasi" required>
                       </div>
                       <div class="col-md-3">
-                        <input type="number" name="stok_variasi[]" class="form-control" value="{{ $v->stok }}" placeholder="Stok" required>
+                        <input type="number" name="stok_variasi[]" class="form-control" value="{{ $v->stok }}" placeholder="Stok Variasi">
                       </div>
                       <div class="col-md-1 text-center">
                         <button type="button" class="btn btn-danger btn-hapus-variasi">X</button>
@@ -137,13 +137,13 @@
       newRow.className = 'row mb-2 variasi-row';
       newRow.innerHTML = `
             <div class="col-md-4">
-                <input type="text" name="nama_variasi[]" class="form-control" placeholder="Contoh: Ukuran M" required>
+                <input type="text" name="nama_variasi[]" class="form-control" placeholder="Nama Variasi" required>
             </div>
             <div class="col-md-4">
-                <input type="number" name="harga_variasi[]" class="form-control" placeholder="Contoh: 50000" required>
+                <input type="number" name="harga_variasi[]" class="form-control" placeholder="Harga Variasi" required>
             </div>
             <div class="col-md-3">
-                <input type="number" name="stok_variasi[]" class="form-control" placeholder="Stok" required>
+                <input type="number" name="stok_variasi[]" class="form-control" placeholder="Stok Variasi">
             </div>
             <div class="col-md-1 text-center">
                 <button type="button" class="btn btn-danger btn-hapus-variasi">X</button>

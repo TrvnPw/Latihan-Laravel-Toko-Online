@@ -2,6 +2,88 @@
 <html dir="ltr" lang="en">
 
 <style>
+  /* ============================================================== */
+  /* CUSTOM UI TWEAKS - BIKIN BACKEND MAKIN SIKMA                     */
+  /* ============================================================== */
+
+  /* 1. Background Halaman Lebih Soft */
+  body,
+  .page-wrapper {
+    background-color: #f4f6f9 !important;
+  }
+
+  /* 2. Percantik Card (Kotak Konten) */
+  .card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    /* Shadow halus */
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* 3. Percantik Input Form */
+  .form-control,
+  .form-select {
+    border-radius: 8px;
+    border: 1px solid #dce1e7;
+    padding: 10px 15px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #0062FF !important;
+    /* Warna biru saat diklik */
+    box-shadow: 0 0 0 0.2rem rgba(0, 98, 255, 0.25) !important;
+    /* Efek glow biru transparan */
+    outline: 0;
+  }
+
+  /* 4. Percantik Tombol */
+  .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 8px 20px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 5. Percantik Tabel */
+  .table th {
+    background-color: #f8f9fa;
+    border-top: none !important;
+    border-bottom: 2px solid #e9ecef !important;
+    font-weight: 600;
+    color: #4f5467;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+
+  .table td {
+    vertical-align: middle !important;
+    border-top: 1px solid #f1f3f5;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #f8faff;
+    /* Warna biru super muda pas di-hover */
+  }
+
+  /* 6. Label Form Biar Lebih Rapi */
+  label {
+    font-weight: 600;
+    color: #3e5569;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+
+
   /* Mengatur agar wrapper utama mengambil tinggi layar penuh */
   #main-wrapper {
     display: flex;
@@ -33,7 +115,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_zackana_store.png') }}">
   <title>Admin Panel</title>
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('backend/extralibs/multicheck/multicheck.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('backend/extra-libs/multicheck/multicheck.css') }}">
   <link href="{{ asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
   <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -70,7 +152,7 @@
           <!-- ============================================================== -->
           <!-- Logo -->
           <!-- ============================================================== -->
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{ route('backend.beranda') }}">
             <!-- Logo icon -->
             <b class="logo-icon p-l-10">
               <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -368,11 +450,17 @@
   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script> -->
   <script>
-    ClassicEditor
-      .create(document.querySelector('#ckeditor'))
-      .catch(error => {
-        console.error(error);
-      });
+    // Cari elemen dengan id 'ckeditor'
+    const editorElement = document.querySelector('#ckeditor');
+
+    // Hanya jalankan CKEditor jika elemen tersebut ditemukan di halaman ini
+    if (editorElement) {
+      ClassicEditor
+        .create(editorElement)
+        .catch(error => {
+          console.error(error);
+        });
+    }
   </script>
 </body>
 

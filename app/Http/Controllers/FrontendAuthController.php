@@ -35,7 +35,7 @@ class FrontendAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('frontend.home')->with('success', 'Registrasi berhasil! Selamat datang.');
+        return redirect()->route('frontend.index')->with('success', 'Registrasi berhasil! Selamat datang.');
     }
 
     // ================= LOGIN =================

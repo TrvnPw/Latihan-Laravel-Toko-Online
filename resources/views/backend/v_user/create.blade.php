@@ -26,11 +26,12 @@
               </div>
               <div class="col-md-8">
                 <div class="form-group">
-                  <label>Hak Ases</label>
+                  <label>Hak Akses</label>
                   <select name="role" class="form-control @error('role') is-invalid @enderror">
                     <option value="" {{ old('role') == '' ? 'selected' : '' }}> - Pilih Hak Akses - </option>
-                    <option value="1" {{ old('role') == '1' ? 'selected' : '' }}> Super Admin</option>
+                    <option value="1" {{ old('role') == '1' ? 'selected' : '' }}> Super Admin </option>
                     <option value="0" {{ old('role') == '0' ? 'selected' : '' }}> Admin </option>
+                    <option value="2" {{ old('role') == '2' ? 'selected' : '' }}> Member Biasa </option>
                   </select>
                   @error('role')
                   <span class="invalid-feedback alert-danger" role="alert">

@@ -39,7 +39,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'email' => 'required|max:255|email|unique:user',
-            'role' => 'required',
+            'role' => 'required|in:0,1,2', // Ubah bagian ini agar menerima angka 2
             'hp' => 'required|min:10|max:13',
             'password' => 'required|min:4|confirmed',
             'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',

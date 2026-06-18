@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'hp' => '0812345678901',
             'foto' => 'logo.png',
-            'password' => bcrypt('P@55word'),
+            'password' => bcrypt('Zackana12#'),
         ]);
         #untuk record berikutnya silahkan, beri nilai berbeda pada nilai: nama, email, hp dengan nilai masing-masing anggota kelompok 
         User::create([
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'role' => '1',
             'status' => 1,
             'hp' => '081234567892',
-            'password' => bcrypt('P@55word'),           
+            'password' => bcrypt('Revan12#'),           
         ]);
 
         User::create([
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'role' => '1',
             'status' => 1,
             'hp' => '081234567892',
-            'password' => bcrypt('P@55word'),
+            'password' => bcrypt('Zacky12#'),
         ]);
 
         User::create([
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'role' => '0',
             'status' => 1,
             'hp' => '081234567892',
-            'password' => bcrypt('P@55word'),
+            'password' => bcrypt('Admin12#'),
         ]);
         #data kategori 
         Kategori::create([
