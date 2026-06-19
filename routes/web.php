@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\FrontendAuthController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\BannerController;
 
 // ==========================================
 // 1. ROUTE PUBLIC (TIDAK PERLU LOGIN)
@@ -78,4 +79,12 @@ Route::middleware(['auth', IsAdmin::class])->group(function () {
   Route::post('foto-produk/store', [ProdukController::class, 'storeFoto'])->name('backend.foto_produk.store');
   Route::delete('foto-produk/{id}', [ProdukController::class, 'destroyFoto'])->name('backend.foto_produk.destroy');
   Route::resource('backend/produk', ProdukController::class, ['as' => 'backend']);
+
+  // banner
+  Route::resource('backend/banner', BannerController::class)->except(['show', 'edit', 'update'])->names([
+    'index' => 'backend.banner.index',
+    'create' => 'backend.banner.create',
+    'store' => 'backend.banner.store',
+    'destroy' => 'backend.banner.destroy',
+  ]);
 });

@@ -3,104 +3,313 @@
 
 <style>
   /* ============================================================== */
-  /* CUSTOM UI TWEAKS - BIKIN BACKEND MAKIN SIKMA                     */
+  /* DESIGN SYSTEM - ROOT VARIABLES                                 */
   /* ============================================================== */
+  :root {
+    /* Brand Colors */
+    --digital-blue: #0062FF;
+    --slate-black: #0F172A;
+    --alert-red: #EF4444;
+    --warning-amber: #F59E0B;
+    --safe-emerald: #10B981;
 
-  /* 1. Background Halaman Lebih Soft */
+    /* Grayscale */
+    --gray-90: #1E293B;
+    --gray-70: #475569;
+    --gray-50: #94A3B8;
+    --gray-30: #CBD5E1;
+    --gray-10: #F8FAFC;
+    --white: #FFFFFF;
+
+    /* Blue Ramps (Hover/Focus States) */
+    --blue-90: #0038B3;
+    --blue-70: #004EE6;
+    --blue-30: #66A3FF;
+    --blue-10: #E5F0FF;
+    --blue-5: #F0F7FF;
+  }
+
+  /* ============================================================== */
+  /* TYPOGRAPHY & BODY                                              */
+  /* ============================================================== */
   body,
   .page-wrapper {
-    background-color: #f4f6f9 !important;
+    background-color: var(--gray-10) !important;
+    color: var(--gray-90);
+    font-size: 14px;
+    /* Body P */
+    line-height: 24px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
-  /* 2. Percantik Card (Kotak Konten) */
-  .card {
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    /* Shadow halus */
-    transition: all 0.3s ease-in-out;
+  h1,
+  .h1 {
+    font-size: 36px;
+    line-height: 48px;
+    font-weight: 700;
+    color: var(--slate-black);
   }
 
-  /* 3. Percantik Input Form */
-  .form-control,
-  .form-select {
-    border-radius: 8px;
-    border: 1px solid #dce1e7;
-    padding: 10px 15px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  h2,
+  .h2 {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 700;
+    color: var(--slate-black);
   }
 
-  .form-control:focus,
-  .form-select:focus {
-    border-color: #0062FF !important;
-    /* Warna biru saat diklik */
-    box-shadow: 0 0 0 0.2rem rgba(0, 98, 255, 0.25) !important;
-    /* Efek glow biru transparan */
-    outline: 0;
+  h3,
+  .h3 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+    color: var(--slate-black);
   }
 
-  /* 4. Percantik Tombol */
-  .btn {
-    border-radius: 8px;
-    font-weight: 500;
-    padding: 8px 20px;
-    letter-spacing: 0.3px;
-    transition: all 0.2s;
+  h4,
+  .h4 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    color: var(--slate-black);
   }
 
-  .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .text-micro {
+    font-size: 10px;
+    line-height: 16px;
   }
 
-  /* 5. Percantik Tabel */
-  .table th {
-    background-color: #f8f9fa;
-    border-top: none !important;
-    border-bottom: 2px solid #e9ecef !important;
-    font-weight: 600;
-    color: #4f5467;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
+  /* Micro / Caption */
+  .text-small {
+    font-size: 12px;
+    line-height: 20px;
+    color: var(--gray-70);
   }
 
-  .table td {
-    vertical-align: middle !important;
-    border-top: 1px solid #f1f3f5;
-  }
+  /* Body S */
 
-  .table-hover tbody tr:hover {
-    background-color: #f8faff;
-    /* Warna biru super muda pas di-hover */
-  }
-
-  /* 6. Label Form Biar Lebih Rapi */
-  label {
-    font-weight: 600;
-    color: #3e5569;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-  }
-
-
-  /* Mengatur agar wrapper utama mengambil tinggi layar penuh */
+  /* ============================================================== */
+  /* SPACING & LAYOUT                                               */
+  /* xs: 4px | s: 8px | sm: 12px | m: 16px | l: 24px | xl: 32px     */
+  /* ============================================================== */
   #main-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
 
-  /* Membuat page-wrapper mengisi ruang kosong agar footer terdorong ke bawah */
   .page-wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  /* Memastikan konten di dalam page-wrapper mengisi ruang */
   .container-fluid {
     flex: 1;
+    padding: 24px;
+    /* L Spacing */
+  }
+
+  /* ============================================================== */
+  /* UI COMPONENTS (Card, Button, Form, Table)                      */
+  /* ============================================================== */
+
+  /* Card */
+  .card {
+    border-radius: 12px;
+    /* SM Spacing */
+    border: 1px solid var(--gray-30);
+    background-color: var(--white);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    margin-bottom: 24px;
+    /* L Spacing */
+  }
+
+  /* Buttons */
+  .btn {
+    border-radius: 8px;
+    /* S Spacing */
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 16px;
+    /* S & M Spacing */
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: var(--digital-blue);
+    color: var(--white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--blue-70);
+  }
+
+  .btn-success {
+    background-color: var(--safe-emerald);
+    color: var(--white);
+  }
+
+  .btn-danger {
+    background-color: var(--alert-red);
+    color: var(--white);
+  }
+
+  .btn-warning {
+    background-color: var(--warning-amber);
+    color: var(--slate-black);
+  }
+
+  .btn-secondary {
+    background-color: var(--gray-30);
+    color: var(--slate-black);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--gray-50);
+    color: var(--white);
+  }
+
+  /* Input Form */
+  label {
+    font-size: 12px;
+    /* Body S */
+    font-weight: 700;
+    color: var(--gray-70);
+    margin-bottom: 8px;
+    /* S Spacing */
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 8px;
+    /* S Spacing */
+    border: 1px solid var(--gray-50);
+    padding: 12px 16px;
+    /* SM & M Spacing */
+    font-size: 14px;
+    color: var(--gray-90);
+    background-color: var(--white);
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--digital-blue) !important;
+    box-shadow: 0 0 0 4px var(--blue-10) !important;
+    /* Glow sesuai color ramps */
+    outline: none;
+  }
+
+  /* Table */
+  .table th {
+    background-color: var(--gray-10);
+    border-bottom: 2px solid var(--gray-30) !important;
+    border-top: none !important;
+    font-weight: 700;
+    color: var(--gray-70);
+    font-size: 12px;
+    /* Body S */
+    text-transform: uppercase;
+    padding: 12px 16px;
+  }
+
+  .table td {
+    vertical-align: middle !important;
+    border-top: 1px solid var(--gray-30);
+    color: var(--gray-90);
+    padding: 16px;
+    /* M Spacing */
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: var(--blue-5);
+    /* Hover table pake Blue 5 */
+  }
+
+  /* ============================================================== */
+  /* OVERRIDE TEMA BAWAAN (SIDEBAR & TOPBAR)                        */
+  /* ============================================================== */
+
+  /* 1. Topbar (Header atas) dibikin Slate Black biar elegan */
+  .topbar,
+  .topbar .top-navbar .navbar-header[data-logobg="skin5"] {
+    background-color: var(--slate-black) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 2. Sidebar dibikin Gray 90 biar ada beda dikit (hierarki) dari Topbar */
+  .left-sidebar[data-sidebarbg="skin5"],
+  .left-sidebar[data-sidebarbg="skin5"] ul {
+    background-color: var(--gray-90) !important;
+  }
+
+  /* 3. Teks Menu Sidebar biasa */
+  .sidebar-nav ul .sidebar-item .sidebar-link {
+    color: var(--gray-50) !important;
+    opacity: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 4px 16px;
+    /* Kasih jarak dari pinggir biar kayak tombol */
+    transition: all 0.2s ease;
+  }
+
+  /* Ikon di dalem menu sidebar */
+  .sidebar-nav ul .sidebar-item .sidebar-link i {
+    color: var(--gray-50) !important;
+  }
+
+  /* 4. Efek pas Menu Sidebar di-hover */
+  .sidebar-nav ul .sidebar-item .sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--white) !important;
+  }
+
+  .sidebar-nav ul .sidebar-item .sidebar-link:hover i {
+    color: var(--white) !important;
+  }
+
+  /* 5. Menu Sidebar yang lagi AKTIF (Pake Digital Blue) */
+  .sidebar-nav ul .sidebar-item.selected>.sidebar-link,
+  .sidebar-nav ul .sidebar-item.active>.sidebar-link {
+    background-color: var(--digital-blue) !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 12px rgba(0, 98, 255, 0.25);
+  }
+
+  .sidebar-nav ul .sidebar-item.selected>.sidebar-link i,
+  .sidebar-nav ul .sidebar-item.active>.sidebar-link i {
+    color: var(--white) !important;
+  }
+
+  /* 6. Kotak Alert "Selamat Datang" di Beranda biar gak ijo norak */
+  .alert,
+  /* Asumsi lu pake class alert bawaan bootstrap buat kotak ijo itu */
+  .card-body>div[style*="background"] {
+    /* Buat jaga-jaga kalau lu nembak background manual */
+    background-color: var(--blue-5) !important;
+    border: 1px solid var(--blue-10) !important;
+    color: var(--blue-90) !important;
+    border-radius: 12px;
+  }
+
+  /* Teks judul di dalem alert-nya */
+  .alert h4,
+  .alert strong,
+  .card-body>div[style*="background"] strong {
+    color: var(--digital-blue) !important;
+    font-size: 18px;
+    /* H3 dari guideline */
+    font-weight: 700;
+  }
+
+  /* Garis pembatas di dalem alert */
+  .alert hr,
+  .card-body>div[style*="background"] hr {
+    border-top-color: var(--blue-30) !important;
+    opacity: 0.3;
   }
 </style>
 
@@ -268,6 +477,11 @@
             </li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.user.index') }}" aria-expanded="false"><i
                   class="mdi mdi-account"></i><span class="hide-menu">User</span></a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.banner.index') }}" aria-expanded="false">
+                <i class="mdi mdi-image"></i><span class="hide-menu">Banner</span>
+              </a>
             </li>
             <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Data Produk </span></a>
               <ul aria-expanded="false" class="collapse  first-level">

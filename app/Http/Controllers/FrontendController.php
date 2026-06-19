@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Banner;
 
 class FrontendController extends Controller
 {
@@ -20,7 +21,12 @@ class FrontendController extends Controller
         // Kita pakai 'with' untuk memuat data variasi sekaligus
         $produk = Produk::with('variasi')->where('status', 1)->get();
 
-        return view('frontend.index', compact('produk'));
+        // --- TAMBAHAN UNTUK BANNER ---
+        // Ambil data banner yang statusnya 1 (Aktif), urutkan dari yang terbaru
+        $banners = Banner::where('status', 1)->orderBy('id', 'desc')->get();
+
+        // Jangan lupa tambahkan 'banners' ke dalam compact() biar terkirim ke view
+        return view('frontend.index', compact('produk', 'banners'));
     }
 
     public function detail($id)

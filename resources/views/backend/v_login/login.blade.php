@@ -1,166 +1,174 @@
 <!DOCTYPE html>
-<html dir="ltr">
+<html dir="ltr" lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_zackana_store.png')}}">
-    <title>Admin Panel</title>
-    <!-- Custom CSS -->
-    <link href="{{ asset('backend/dist/css/style.min.css')}}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->  
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <title>Login - Admin Panel</title>
+    <!-- Bisa ngambil font dari Google kalau mau persis banget, contoh: Inter atau Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --digital-blue: #0062FF;
+            --slate-black: #0F172A;
+            --gray-90: #1E293B;
+            --gray-70: #475569;
+            --gray-50: #94A3B8;
+            --gray-30: #CBD5E1;
+            --gray-10: #F8FAFC;
+            --white: #FFFFFF;
+            --blue-10: #E5F0FF;
+            --blue-70: #004EE6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gray-10);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--gray-90);
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 400px;
+            padding: 24px;
+        }
+
+        .login-card {
+            background-color: var(--white);
+            border: 1px solid var(--gray-30);
+            border-radius: 12px;
+            padding: 32px;
+            /* XL Spacing */
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--slate-black);
+            margin: 0 0 8px 0;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            color: var(--gray-70);
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            /* L Spacing */
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-70);
+            margin-bottom: 8px;
+            /* S Spacing */
+        }
+
+        .form-control {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: 1px solid var(--gray-50);
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--gray-90);
+            background-color: var(--white);
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--digital-blue);
+            box-shadow: 0 0 0 4px var(--blue-10);
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: var(--digital-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            /* SM & M Spacing */
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: var(--blue-70);
+        }
+
+        .alert-error {
+            background-color: #FEF2F2;
+            /* Merah super muda */
+            color: #EF4444;
+            /* Alert Red */
+            border: 1px solid #FCA5A5;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Preloader - style you can find in spinners.css -->
-        <!-- ============================================================== -->
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- Preloader - style you can find in spinners.css -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
-            <div class="auth-box bg-dark border-top border-secondary">
-                <div id="loginform">
-                    <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="{{ asset('image/logo.png') }}" alt="logo" /></span>
-                    </div>
-                    <!-- Form -->
-                    <!-- error -->
-                    @if( session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dissmis="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>{{ session('error') }}</strong>
-                    </div>
-                    @endif
-                    <!-- errorEnd -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="{{ route('backend.login') }}" method="post">
-                        @csrf
-                        <div class="row p-b-30">
-                            <div class="col-12">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
-                                    </div>
-                                    <input type="text" name="email" value="{{old('email')}}" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Masukkan Email" aria-label="Username" aria-describedby="basic-addon1">
-                                    @error('email')
-                                    <span class="invalid-feedback alert-danger" role="alert">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
-                                    </div>
-                                    <input type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-                                    @error('password')
-                                    <span class="invalid-feedback alert-danger" role="alert">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row border-top border-secondary">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="p-t-20">
-                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
-                                        <button class="btn btn-success float-right" type="submit">Login</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div id="recoverform">
-                    <div class="text-center">
-                        <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
-                    </div>
-                    <div class="row m-t-20">
-                        <!-- Form -->
-                        <form class="col-12" action="index.html">
-                            <!-- email -->
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
-                                </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <!-- pwd -->
-                            <div class="row m-t-20 p-t-20 border-top border-secondary">
-                                <div class="col-12">
-                                    <a class="btn btn-success" href="#" id="to-login" name="action">Back To Login</a>
-                                    <button class="btn btn-info float-right" type="button" name="action">Recover</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- All Required js -->
-    <!-- ============================================================== -->
-    <script src="{{ asset('backend/libs/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('backend/libs/popper.js/dist/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('backend/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugin js -->
-    <!-- ============================================================== -->
-    <script>
-        $('[data-toggle="tooltip"]').tooltip();
-        $(".preloader").fadeOut();
-        // ============================================================== 
-        // Login and Recover Password 
-        // ============================================================== 
-        $('#to-recover').on("click", function() {
-            $("#loginform").slideUp();
-            $("#recoverform").fadeIn();
-        });
-        $('#to-login').click(function() {
 
-            $("#recoverform").hide();
-            $("#loginform").fadeIn();
-        });
-    </script>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <!-- Bisa diganti logo gambar lu -->
+                <h2>Welcome Back</h2>
+                <p>Silakan masuk ke akun admin Anda.</p>
+            </div>
+
+            <!-- Nampilin Error Login -->
+            @if ($errors->any())
+            <div class="alert-error">
+                Username atau password salah.
+            </div>
+            @endif
+
+            <!-- Form Login (Sesuaikan route action lu) -->
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="admin@zackana.com" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-login">Masuk Sekarang</button>
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px; color: var(--gray-50); font-size: 12px;">
+            © 2026 Toko Paling Sikma. All rights reserved.
+        </div>
+    </div>
 
 </body>
 
