@@ -25,18 +25,21 @@
             {{-- --- BAGIAN KONTAK YANG UDAH DIKELUARIN DARI KOTAK --- --}}
             <div class="mb-4">
 
-
                 {{-- Input Email --}}
                 <div class="mb-3">
                     <label class="form-label fw-bold">Email</label>
-                    <input type="email" name="email_tujuan" class="form-control" placeholder="example@gmail.com" required>
+                    <input type="email" name="email_tujuan" class="form-control" placeholder="example@gmail.com" required
+                        oninvalid="this.setCustomValidity('Email Wajib di Isi!')"
+                        oninput="this.setCustomValidity('')">
                 </div>
 
                 {{-- Input No WhatsApp --}}
                 <div class="mb-2">
                     <label class="form-label fw-bold">No. WhatsApp</label>
                     <div class="input-group">
-                        <input type="number" name="no_hp_tujuan" class="form-control" placeholder="081234567890" required>
+                        <input type="number" name="no_hp_tujuan" class="form-control" placeholder="081234567890" required
+                            oninvalid="this.setCustomValidity('Nomor WhatsApp Wajib di Isi!')"
+                            oninput="this.setCustomValidity('')">
                     </div>
                     {{-- Ganti text-white-50 jadi text-muted biar kelihatan di background putih --}}
                     <small class="text-muted" style="font-size: 12px;">**Nomor ini akan dihubungi jika terjadi masalah</small>
